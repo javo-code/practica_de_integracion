@@ -2,6 +2,7 @@ import Services from "./class.services.js";
 import factory from "../persistence/daos/factory.js";
 const { userDao } = factory;
 import jwt from "jsonwebtoken";
+import { logger } from "../utils/logger.winston.js";
 import "dotenv/config";
 
 const SECRET_KEY_JWT = process.env.SECRET_KEY_JWT;
@@ -24,7 +25,7 @@ export default class UserService extends Services {
     if (!newUser) throw new Error("Validation Error!");
     else return newUser;
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 };
 
@@ -34,17 +35,17 @@ export default class UserService extends Services {
       if(userExist) return this.#generateToken(userExist);
       else return false;
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
-  async geUserByEmail(email){
-  try {
-    const user = await userDao.getByEmail(email);
-    if (!user) return false;
-    else return user;
-  } catch (error) {
-    console.log(error);
-  }
-};
+  async getUserByEmail(email){
+    try {
+      const user = await userDao.getByEmail(email);
+      if (!user) return false;
+      else return user;
+    } catch (error) {
+      logger.error(error);
+    }
+  };
 }

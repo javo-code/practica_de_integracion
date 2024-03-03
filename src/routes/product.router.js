@@ -1,16 +1,21 @@
 import { Router } from "express";
-import ProdController from "../controllers/product.controllers.js";
+import ProductController from "../controllers/product.controllers.js";
+import productValidator from "../middlewares/productValidator.js";
 
 const router = Router();
-const controller = new ProdController();
+const controller = new ProductController();
 
 router
+//-------------------📌 PRODUCT MAIN ROUTES
     .get("/", controller.getAll)
     .get("/:id", controller.getById)
-    .post("/", controller.create)
+    .post("/", productValidator, controller.create)
     .put("/:id", controller.update)
     .delete("/:id", controller.delete)
-    .get("/dto/:id", controller.getProdById)
+    
+//-------------------📌 PRODUCT ROUTES
+    .get("/dto/:id", controller.getById)
+    .post("/mockingproducts", controller.createRandomProducts)
 
 
 export default router;

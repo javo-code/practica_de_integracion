@@ -2,7 +2,7 @@ import { UserModel } from "./models/user.model.js";
 import "dotenv/config";
 import MySqlDao from "./mysql.dao.js";
 import jwt from "jsonwebtoken";
-import { createHash, isValidPassword } from "../../../utils.js";
+import { createHash, isValidPassword } from "../../../utils/utils.js";
 
 const SECRET_KEY = process.env.SECRET_KEY_JWT;
 

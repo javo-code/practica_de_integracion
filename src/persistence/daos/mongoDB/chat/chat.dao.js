@@ -5,6 +5,4 @@ export default class ChatMongoDao extends MongoDao {
     constructor() {
         super(ChatModel)
     }
-
-
 };

@@ -22,6 +22,6 @@ export const sendGmail = async (req, res) => {
     const response = await transporter.sendMail(gmailOptions);
     res.json(response);
   } catch (error) {
-    console.log("👹 Error en el email.cotroller => ", error);
+    next(error);
   }
 };

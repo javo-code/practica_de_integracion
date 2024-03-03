@@ -10,9 +10,26 @@ export const userValidator = (req, res, next) => {
     typeof req.body.age !== 'number' ||
     req.body.password === undefined ||
     typeof req.body.password !== 'string'
-  )
-    res.status(400).json({ msg: 'Invalid body' });
-  else next();
+  ) {
+    console.log(
+      `You must to complete all fields with the correct data type: 
+      \n\n first name: must be => "string" 
+      \n last name: must be => "string" 
+      \n email: must be => "string" 
+      \n age: must be => "number" 
+      \n password: must be => "string"`
+    );
+    res.status(400).send(
+      `You must to complete all fields with the correct data type: 
+      \n\n first name: must be => "string" 
+      \n last name: must be => "string" 
+      \n email: must be => "string" 
+      \n age: must be => "number" 
+      \n password: must be => "string"`
+    );
+  } else {
+    next();
+  }
 };
 
 export default userValidator;

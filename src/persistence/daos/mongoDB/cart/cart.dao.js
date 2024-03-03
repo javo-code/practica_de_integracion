@@ -13,7 +13,7 @@ export default class CartMongoDao extends MongoDao {
       cart.save();
       return cart;
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -25,7 +25,7 @@ export default class CartMongoDao extends MongoDao {
       cart.save();
       return cart;
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -36,7 +36,7 @@ export default class CartMongoDao extends MongoDao {
       cart.save();
       return prod;
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -46,7 +46,7 @@ export default class CartMongoDao extends MongoDao {
       cart.save();
       return cart;
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 }

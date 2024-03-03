@@ -7,7 +7,7 @@ export default class Services {
     try {
       return this.dao.getAll();
     } catch (error) {
-      console.log("👹 Error en el getAll del class.services => ", error);
+      throw new Error(error.message);
     }
   };
 
@@ -17,7 +17,7 @@ export default class Services {
       if (!item) return false;
       else return item;
     } catch (error) {
-      console.log("👹 Error en el getById del class.services => ", error);
+      throw new Error(error.message);
     }
   };
 
@@ -27,7 +27,7 @@ export default class Services {
       if (!newItem) return false;
       else return newItem;
     } catch (error) {
-      console.log("👹 Error en el create del class.services => ", error);
+      throw new Error(error.message);
     }
   };
 
@@ -37,7 +37,7 @@ export default class Services {
       if (item) return false;
       else return await this.dao.update(id, obj);
     } catch (error) {
-      console.log("👹 Error en el update del class.services => ", error);
+      throw new Error(error.message);
     }
   };
 
@@ -45,7 +45,7 @@ export default class Services {
     try {
       return await this.dao.delete(id);
     } catch (error) {
-      console.log("👹 Error en el delete del class.services => ", error);
+      throw new Error(error.message);
     }
   };
 }

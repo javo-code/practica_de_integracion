@@ -24,7 +24,7 @@ export default class FSDao {
         return [];
       }
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -37,7 +37,7 @@ export default class FSDao {
       }
       return false;
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -52,7 +52,7 @@ export default class FSDao {
       await fs.promises.writeFile(this.path, JSON.stringify(itemsFile));
       return item;
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -68,7 +68,7 @@ export default class FSDao {
       }
       await fs.promises.writeFile(this.path, JSON.stringify(itemsFile));
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 
@@ -82,7 +82,7 @@ export default class FSDao {
         throw new Error(`Item id: ${id} not found`);
       }
     } catch (error) {
-      console.log(error);
+        throw new Error(error.message);
     }
   }
 }

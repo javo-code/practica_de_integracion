@@ -8,7 +8,7 @@ export default class MongoDao {
       const response = await this.model.paginate({}, {page, limit});
       return response;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
 
@@ -17,16 +17,17 @@ export default class MongoDao {
       const response = await this.model.findById(id);
       return response;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
+
 
   async create(obj) {
     try {
       const response = await this.model.create(obj);
       return response;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
 
@@ -35,7 +36,7 @@ export default class MongoDao {
       await this.model.updateOne({ _id: id }, obj);
       return obj;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
 
@@ -44,7 +45,7 @@ export default class MongoDao {
       const response = await this.model.findByIdAndDelete(id);
       return response;
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
 }

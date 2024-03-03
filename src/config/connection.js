@@ -1,4 +1,5 @@
 import { connect } from "mongoose";
+import { logger } from "../utils/logger.winston.js";
 import 'dotenv/config'
 
 const connectionString = process.env.MONGO_URL_LOCAL;
@@ -6,8 +7,8 @@ const connectionString = process.env.MONGO_URL_LOCAL;
 export const initMongoDB = async () => {
   try {
     await connect(connectionString);
-    console.log("Conectado a la base de datos de MongoDB");
+    logger.info("Conectado a la base de datos de MongoDB");
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 };

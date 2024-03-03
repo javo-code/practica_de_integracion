@@ -3,7 +3,6 @@ import UserService from "../services/user.services.js";
 const userService = new UserService();
 import UserMongoDao from "../persistence/daos/mongoDB/users/user.dao.js";
 const userDao = new UserMongoDao();
-import { createResponse } from "../utils.js";
 
 export default class UserController extends Controllers {
   constructor() {
@@ -35,7 +34,7 @@ export default class UserController extends Controllers {
         createResponse(res, 200, token);
       }
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 
@@ -49,7 +48,7 @@ export default class UserController extends Controllers {
         role,
       });
     } catch (error) {
-      next(error.message);
+      next(error);
     }
   };
 }
