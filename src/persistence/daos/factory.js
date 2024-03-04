@@ -21,17 +21,17 @@ let prodDao;
 let userDao;
 let ticket;
 
-const persistence = process.argv[3];
+const persistence = process.argv[2];
 
 switch (persistence) {
-    case "FS":
+    case "fs":
         userDao = new UserFSDao("../daos/fileSystem/users.json");
         prodDao = new ProductFSDao("../daos/fileSystem/porducts.json");
         cartDao = new CartFSDao ("../daos/fileSystem/carts.json");
         ticket= new TicketMongoDao ("../daos/mongoDB/ticket/ticket.dao.js")
         console.log("📚 La PERSISTENCIA actual es => ", persistence);
         break;
-    case "MONGO":
+    case "mongo":
         await initMongoDB();
         userDao = new UserMongoDao();
         prodDao = new ProductMongoDao();
@@ -39,7 +39,7 @@ switch (persistence) {
         ticket = new TicketMongoDao();
         console.log("📚 La PERSISTENCIA actual es => ", persistence);
         break;
-    case 'MYSQL':
+    case 'mysql':
         await initMySqlDB();
         userDao = new UserDaoMySql();
         prodDao = new ProductDaoMySql();

@@ -5,6 +5,8 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { Command } from "commander";
 import { logger } from "./utils/logger.winston.js";
 import "dotenv/config.js";
+import cookieParser from "cookie-parser";
+import config from "./config/config.js"
 
 
 const mainRouter = new MainRouter();
@@ -18,14 +20,15 @@ commander.parse();
 console.log("options", commander.opts());
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(config.SECRET_COOKIES));
 app.use(morgan('dev'));
 
 app.use('/api', mainRouter.getRouter());
 
 app.use(errorHandler);
 
-const PORT = process.argv[2] || 8080;
+const PORT = config.PORT;
 const mode = commander.opts().m
 
 app.listen(PORT, () => {

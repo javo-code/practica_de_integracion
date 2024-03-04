@@ -7,23 +7,40 @@ export default class UserMongoDao extends MongoDao {
     super(UserModel);
   }
   
+
+  /**
+   * Genera el token del usuario
+   * @param {*} user
+   * @param {*} timeExp
+   * @returns token
+   */
+  generateToken(user, timeExp) {
+    const payload = {
+      userId: user._id,
+    };
+    const token = jwt.sign(payload, SECRET_KEY, {
+      expiresIn: timeExp,
+    });
+    return token;
+  }
+
     async login(user){
     try {
       const { email, password } = user;
-      // console.log(email);
+      //logger.info(email);
       const userExist = await this.getByEmail(email); 
-      // console.log('dao', userExist);
+      //logger.info('dao', userExist);
       if(userExist){
         const passValid = isValidPassword(userExist, password)
         if(!passValid) return false
-        else return userExist
+        else return this.generateToken(userExist, "15m");
       } return false
     } catch (error) {
       throw new Error(error)
     }
   }
 
-async createUser(user) {
+async register(user) {
     try {
       const { email, password } = user;
       const existUser = await this.model.findOne({email});
@@ -52,7 +69,7 @@ async createUser(user) {
     async getByEmail(email){
     try {
       const userExist = await this.model.findOne({email}); 
-      console.log(userExist);
+      //logger.info(userExist);
       if(userExist){
         return userExist
       } return false
